@@ -10,19 +10,42 @@
       <label>
         Email :
         <input type="email" name="email" formControlName="mail" />
+        {{ userForm.get("credentials.mail")?.errors?.mail.rules }}
+        <div
+          *ngIf="
+            userForm.get('credentials.mail')?.errors &&
+            !userForm.get('credentials.mail')?.pristine
+          "
+        >
+          <div [hidden]="!userForm.get('credentials.mail')?.errors?.required">
+            Un email est requis
+          </div>
+          <div [hidden]="!userForm.get('credentials.mail')?.invalid">
+            l'email est invalide
+          </div>
+        </div>
       </label>
     </div>
     <div>
       <label>
         Mot de passe :
         <input type="text" name="password" formControlName="pass" />
+        <div
+          *ngIf="
+            userForm.controls['pass'].errors &&
+            !userForm.controls['pass'].pristine
+          "
+        >
+          <div [hidden]="!userForm.controls['pass'].errors.required">
+            Un mot de passe est requis
+          </div>
+        </div>
       </label>
     </div>
-    <div></div>
-    <label>
-      Adresse :
-      <input type="text" name="address" formControlName="add" />
-    </label>
   </div>
+  <label>
+    Adresse :
+    <input type="text" name="address" formControlName="add" />
+  </label>
   <button type="submit" [disabled]="!userForm.valid">Inscription</button>
 </form>
