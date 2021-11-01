@@ -1,4 +1,8 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+<form
+  [formGroup]="userForm"
+  (ngSubmit)="myForm.valid && onSubmit()"
+  #myForm="ngForm"
+>
   <div>
     <label>
       Nom d'utilisateur :
